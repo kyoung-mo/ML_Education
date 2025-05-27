@@ -6,7 +6,6 @@
 
 파이썬은 공식 웹사이트 [python.org](https://www.python.org)에서 다운로드할 수 있습니다.  
 운영체제에 따라 설치 방식이 다르며, 리눅스에서는 다음과 같은 명령어로 설치할 수 있습니다.
-`print("이건 복사 버튼이 안 생기나요")`
 ```bash
 sudo apt update
 sudo apt install python3
