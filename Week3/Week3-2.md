@@ -17,18 +17,18 @@
 
 ### 1️⃣ 손실 함수 모음
 
-| 범주 | 함수 | 식(요약) | 특징 / 사용처 |
-|------|------|----------|---------------|
-| 회귀 | **MSE** | \( \dfrac1N \sum (y-\hat{y})^2 \) | 이상치 민감, 보편적 |
-|  | MAE | \( \dfrac1N \sum |y-\hat{y}| \) | 이상치 강인 |
-| 이진 분류 | **BCE** | \( -[y\log \hat{y} + (1-y)\log(1-\hat{y})] \) | 시그모이드 이후 사용 |
-| 다중 분류 | **Cross‑Entropy** | \( -\sum y_k\log\hat{p}_k \) | 소프트맥스 이후 |
+| 범주 | 함수 | 식&nbsp;(요약) | 특징 / 사용처 |
+|------|------|---------------|---------------|
+| 회귀 | **MSE** | \( \dfrac{1}{N} \sum (y-\hat{y})^2 \) | 이상치 민감, 보편적 |
+|      | MAE | \( \dfrac{1}{N} \sum \lvert y-\hat{y} \rvert \) | 이상치 강인 |
+| 이진 분류 | **BCE** | \( -\big[y\log \hat{y} + (1-y)\log(1-\hat{y})\big] \) | 시그모이드 이후 사용 |
+| 다중 분류 | **Cross‑Entropy** | \( -\sum y_k\,\log\hat{p}_k \) | 소프트맥스 이후 |
 | 불균형 | Focal Loss | \( -(1-\hat{p})^{\gamma} \log\hat{p} \) | 어려운 샘플 집중 |
-| 분포 거리 | KL Divergence | \( \sum p\log(p/q) \) | 지식 증류, VAE |
+| 분포 거리 | KL Divergence | \( \sum p\,\log\tfrac{p}{q} \) | 지식 증류, VAE |
 
 > 여기서 \(\hat{p}\) 역시 **예측 확률**을 뜻합니다.
 
----
+
 
 ### 2️⃣ PyTorch 예제
 ```python
