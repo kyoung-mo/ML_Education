@@ -41,6 +41,8 @@ print(s.values)  # array([10, 20, 30])
 *Series는 값(value)과 인덱스(index)가 한 쌍으로 묶인 1차원 배열*입니다.  
 넘파이 배열과 달리 **인덱스를 활용한 라벨 기반 접근**이 가능합니다.
 
+---
+
 ### 🔹 DataFrame(2차원)
 ```python
 data = {
@@ -53,8 +55,6 @@ df
 ```
 `DataFrame`은 **여러 개의 Series가 같은 인덱스를 공유**하며 모인 **표 형태**의 자료구조입니다.  
 열(column)마다 자료형이 달라도 되므로 SQL 테이블과 유사한 개념입니다.
-
----
 
 ### 🔹 DataFrame은 numpy처럼 작동
 
