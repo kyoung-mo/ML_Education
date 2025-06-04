@@ -47,6 +47,9 @@ print("Cross‑Entropy Loss:", loss.item())
 
 ---
 
++) 역전파 관련 내용에 파이 토치 외에도 넘파이 이용해서도 구현해보고, 서로 다르지 않다는 결론을 낼 것
+> 민구랑 상의
+
 ## 🔁 역전파 *(Backpropagation)*
 
 ### 1️⃣ 개념
