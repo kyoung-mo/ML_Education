@@ -89,9 +89,25 @@ print("scikit-learn version:", sklearn.__version__)
 - **인코딩**: 문자 데이터를 숫자로 변환
 - **정규화/표준화**: 값의 범위를 일정하게 맞춤
 - **중복 제거 및 타입 변환** 등
+
 ---
 
-## 🛠️ 실습: 붓꽃(Iris) 분류
+## 🛠️ 실습: Iris 분류
+
+### 🌸 Iris 데이터셋이란?
+
+**Iris**는 머신러닝에서 자주 사용되는 **꽃 품종 분류용 예제 데이터셋**입니다.  
+꽃잎(petal)과 꽃받침(sepal)의 길이/너비 정보를 바탕으로 3종류의 붓꽃 품종을 구분합니다.
+
+---
+
+### ✅ 주요 특징
+
+- 총 150개 샘플 (각 품종당 50개)
+- 4개의 특징(feature): 꽃받침 길이 (`sepal length`), 꽃받침 너비 (`sepal width`), 꽃잎 길이 (`petal length`), 꽃잎 너비 (`petal width`)
+- 3개의 클래스(target): [ 0: Setosa, 1: Versicolor, 2: Virginica ]
+
+---
 
 ### 🔹 1) 데이터 불러오기
 ```python
