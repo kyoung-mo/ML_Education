@@ -31,15 +31,15 @@ y = f(\underbrace{\sum_{i=1}^{n}w_i x_i}_{\text{가중합}} + \; b)
 
 ---
 
-## ⚙️ 활성화 함수 한눈에
+## ⚙️ 활성화 함수 한눈에 보기
 
-| 함수 | 식 | 특징 |
-|------|----|------|
-| **Sigmoid** | \( \sigma(z)=\frac1{1+e^{-z}} \) | 확률 해석 용이, **vanishing gradient** |
-| **Tanh** | \( \tanh(z) \) | 0 중심이지만 여전히 vanishing |
-| **ReLU** | \( \max(0,z) \) | 계산 단순, 빠른 수렴, dying ReLU 주의 |
-| **Leaky ReLU** | \( \max(\alpha z, z) \) | ReLU의 음수 영역 기울기 보완 |
-| **Softmax** | \( \frac{e^{z_k}}{\sum_j e^{z_j}} \) | 다중 클래스 확률 분포 |
+| 함수         | 수식 표현                                   | 특징 |
+|--------------|----------------------------------------------|------|
+| **Sigmoid**  | 1 / (1 + exp(-z))                             | 확률 해석 용이, vanishing gradient 문제 |
+| **Tanh**     | (exp(z) - exp(-z)) / (exp(z) + exp(-z))       | 0 중심, 여전히 vanishing |
+| **ReLU**     | max(0, z)                                     | 계산 단순, 빠른 수렴, dying ReLU 주의 |
+| **Leaky ReLU** | max(α * z, z)                               | ReLU의 음수 영역 보완 |
+| **Softmax**  | exp(z_k) / sum(exp(z_j))                      | 다중 클래스 확률 분포로 해석 |
 
 ---
 
