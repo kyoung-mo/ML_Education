@@ -162,6 +162,15 @@ pivot = df.pivot_table(index='이름', values=['국어', '수학'], aggfunc='mea
 
 ## 📁 실습: CSV 불러와서 분석하기
 
+# 📄 CSV란?
+
+**CSV**(Comma-Separated Values)는 데이터를 **쉼표(,)**로 구분하여 저장하는 **텍스트 파일 형식**입니다.  
+표 형식 데이터를 간단하고 효율적으로 저장하거나 다양한 프로그램 간 데이터 교환에 사용됩니다.
+
+예를 들어:
+
+
+
 ```python
 import pandas as pd
 
