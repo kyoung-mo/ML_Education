@@ -19,8 +19,7 @@
 | 범주 | 함수 | 식 | 특징 / 사용처 |
 |------|------|----------|----------------|
 | 회귀 | MSE | $\dfrac{1}{N} \sum (y - \hat{y})^2$ | 복수가 큰 경우 무가능 |
-|        | MAE | $\dfrac{1}{N} \sum \lvert y - \hat{y} 
-vert$ | 이상치 강인 |
+|        | MAE | $\dfrac{1}{N} \sum \lvert y - \hat{y} vert$ | 이상치 강인 |
 | 이지르 분류 | BCE | $- [y \log \hat{y} + (1 - y) \log (1 - \hat{y})]$ | 시그몬드 후 사용 |
 | 다중 분류 | Cross-Entropy | $-\sum y_k \log \hat{p}_k$ | 소프트맥스 후 사용 |
 | 불규포 | Focal Loss | $-(1 - \hat{p})^{\gamma} \log \hat{p}$ | 어느 사람이 더 어린지 조정 |
