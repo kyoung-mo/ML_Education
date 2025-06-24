@@ -68,59 +68,74 @@ print("Cross‑Entropy Loss:", loss.item())
 
 ### 1️⃣ 넘파이로 (수동 미분)
 
-python
+```python
 import numpy as np
 
-# 시그모이드 및 미분
 def sigmoid(x): return 1 / (1 + np.exp(-x))
 def d_sigmoid(x): return sigmoid(x) * (1 - sigmoid(x))
 
-# 입력, 목표값
 x = np.array([1.0, 0.5])
 y_true = np.array([1.0])
 
-# 임의 파라미터 (가중치/편향)
 W1 = np.array([[0.1, 0.2], [0.3, 0.4]])
 b1 = np.array([0.1, 0.2])
 W2 = np.array([[0.5], [0.6]])
 b2 = np.array([0.3])
 
-# 순전파
 z1 = np.dot(x, W1) + b1
 a1 = sigmoid(z1)
 z2 = np.dot(a1, W2) + b2
 a2 = sigmoid(z2)
-
-# 손실(MSE)
 loss = 0.5 * np.sum((a2 - y_true)**2)
 
-# 역전파(gradient 계산)
 d_loss_a2 = a2 - y_true
-d_a2_z2 = d_sigmoid(z2)
-d_loss_z2 = d_loss_a2 * d_a2_z2    # (출력 쪽)
-
+d_loss_z2 = d_loss_a2 * d_sigmoid(z2)
 d_loss_W2 = np.outer(a1, d_loss_z2)
 d_loss_b2 = d_loss_z2
 
 d_loss_a1 = np.dot(W2, d_loss_z2)
-d_a1_z1 = d_sigmoid(z1)
-d_loss_z1 = d_loss_a1 * d_a1_z1
-
+d_loss_z1 = d_loss_a1 * d_sigmoid(z1)
 d_loss_W1 = np.outer(x, d_loss_z1)
 d_loss_b1 = d_loss_z1
 
 print("NumPy dW1:", d_loss_W1)
 print("NumPy dW2:", d_loss_W2)
+```
 
+### 🧪 수치 미분으로 검증
+
+```python
+def numerical_gradient(f, W, h=1e-5):
+    grad = np.zeros_like(W)
+    for i in range(W.shape[0]):
+        for j in range(W.shape[1]):
+            tmp = W[i, j]
+            W[i, j] = tmp + h
+            fxh1 = f()
+            W[i, j] = tmp
+            fx = f()
+            grad[i, j] = (fxh1 - fx) / h
+    return grad
+
+def loss_func_w1():
+    z1 = np.dot(x, W1) + b1
+    a1 = sigmoid(z1)
+    z2 = np.dot(a1, W2) + b2
+    a2 = sigmoid(z2)
+    return 0.5 * np.sum((a2 - y_true)**2)
+
+num_grad_W1 = numerical_gradient(loss_func_w1, W1)
+print("수치 미분 dW1:", num_grad_W1)
+print("해석 미분 dW1:", d_loss_W1)
+```
 
 ---
 
 ### 2️⃣ 파이토치로 (자동 미분)
 
-python
+```python
 import torch
 
-# 파라미터를 requires_grad=True로 설정
 W1 = torch.tensor([[0.1, 0.2], [0.3, 0.4]], requires_grad=True)
 b1 = torch.tensor([0.1, 0.2], requires_grad=True)
 W2 = torch.tensor([[0.5], [0.6]], requires_grad=True)
@@ -130,39 +145,30 @@ y_true = torch.tensor([1.0])
 
 def sigmoid(x): return 1 / (1 + torch.exp(-x))
 
-# 순전파
 z1 = torch.matmul(x, W1) + b1
 a1 = sigmoid(z1)
 z2 = torch.matmul(a1, W2) + b2
 a2 = sigmoid(z2)
-
-# 손실(MSE)
 loss = 0.5 * ((a2 - y_true) ** 2).sum()
 loss.backward()
 
 print("PyTorch dW1:", W1.grad)
 print("PyTorch dW2:", W2.grad)
-
-
----
-
-### ✅ [실험 결과]
-- **수동 미분(NumPy)** vs **자동 미분(PyTorch)**  
-  → **gradient(미분값)가 거의 동일**하게 계산됨을 확인  
-- 파이토치는 계산 그래프를 자동 생성해서, 역전파/미분이 편리함!
+```
 
 ---
 
-## 🛠️ 실습: 선형 회귀로 y=3x 근사
-python
+## 🛠️ 실습: 선형 회귀로 `y=3x` 근사
+
+```python
 import torch, torch.nn as nn, torch.optim as optim
 
-model = nn.Linear(1, 1)                 # y = wx + b
+model = nn.Linear(1, 1)
 criterion = nn.MSELoss()
 optimizer = optim.SGD(model.parameters(), lr=0.05)
 
 x = torch.tensor([[1.0], [2.0], [3.0]])
-y = torch.tensor([[3.0], [6.0], [9.0]])  # y=3x
+y = torch.tensor([[3.0], [6.0], [9.0]])
 
 for epoch in range(200):
     pred = model(x)
@@ -176,20 +182,19 @@ for epoch in range(200):
         print(f"Epoch {epoch+1:3d}: Loss={loss.item():.4f}")
 
 print("학습된 w, b:", model.weight.item(), model.bias.item())
-
+```
 
 ---
 
 ## 🎯 과제
 
-1. 위 예제를 참고해 nn.Linear(1,1) 로 **y = 3x** 근사하기  
-2. nn.MSELoss() 사용, **에폭마다 손실** 출력  
+1. 위 예제를 참고해 `nn.Linear(1,1)` 로 **`y = 3x`** 근사하기  
+2. `nn.MSELoss()` 사용, **에폭마다 손실** 출력  
 3. 학습 종료 후 **weight(≈3) & bias(≈0)** 확인  
-4. 2단 MLP 구조로 위와 같은 넘파이/파이토치 역전파 실습 직접 수행
+4. 2단 MLP 구조로 위와 같은 넘파이/파이토치 역전파 실습 직접 수행  
+5. 추가 실험: **수치 미분으로 해석 미분 결과 검증**
 
 ---
 
 ✅ **환경**: Python 3.x, Google Colab, numpy, PyTorch ≥ 2.0  
-설치: !pip install numpy torch torchvision -q
-
-그럼 이 내용은 그대로 유지하고, 저 내용을 적절한 위치에 추가해서 .md파일 형식으로 알려줘
+설치: `!pip install numpy torch torchvision -q`
