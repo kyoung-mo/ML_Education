@@ -3,36 +3,128 @@
 
 ---
 
+## 🧱 객체지향 언어
+
+### 객체(Object)
+객체는 자체의 속성과 행동을 함께 가지는 독립적인 단위로, 현실 세계의 사물이나 개념을 소프트웨어적으로 모델링한 것입니다.  
+간단히 말하면 **자체적인 변수와 함수를 갖는 새로운 속성의 코드**입니다.
+
+### 등장 배경
+소프트웨어가 커지면서 절차지향 언어로는 유지보수가 어려워졌고, 객체지향언어는 **다수의 객체**를 통해 현실 세계와 유사하게 시스템을 구성합니다.  
+예: 지도를 그릴 때 건물을 하나의 객체로 보고 위치, 기능 등을 각각 속성으로 저장하면 수정이 쉬움.
+
+---
+
+## 🏗️ 클래스(Class)
+
+클래스는 객체를 만들기 위한 설계도입니다. 모든 파이썬의 자료형은 클래스입니다.
+
+```python
+class A:
+    B = 1
+    def C(self):
+        print('C')
+```
+
+클래스를 인스턴스로 선언하여 사용합니다.
+
+```python
+test = A()
+print(test.B)  # 클래스 내부 변수 접근
+test.C()       # 클래스 내부 메소드 호출
+```
+
+---
+
+### 📌 self
+
+```python
+class A:
+    B = 1
+
+    def C(self):
+        print(self.B)
+
+    def D(self):
+        self.B += 1
+
+test = A()
+test.C()
+test.D()
+test.C()
+```
+
+`self`는 클래스 자기 자신을 가리킵니다. 내부 변수와 메소드에 접근할 때 사용합니다.
+
+---
+
+## ✨ 매직 메소드
+
+### 생성자 `__init__`
+
+```python
+class A:
+    def __init__(self):
+        print('인스턴스 생성됨')
+
+test = A()
+```
+
+### 매개변수 사용 예
+
+```python
+class A:
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+
+    def B(self):
+        print(self.a, self.b)
+
+test = A(1, 2)
+test.B()
+```
+
+---
+
+## 🔁 상속
+
+```python
+class person:
+    def __init__(self, a, b):
+        self.age = a
+        self.country = b
+
+    def old(self):
+        self.age += 1
+
+class programmer(person):
+    def __init__(self, a, b):
+        super().__init__(a, b)
+
+    def prin(self):
+        super().old()
+        print(self.age, self.country)
+
+test = programmer(26, "korea")
+test.old()
+test.prin()
+```
+
+- `super()`는 부모 클래스의 메소드를 호출할 때 사용
+- 자식 클래스는 다수의 부모 클래스를 가질 수 있음
+
+---
+
 ## 📦 import와 패키지 사용
-
-파이썬은 다양한 표준 라이브러리와 외부 패키지를 제공하며, `import` 문을 통해 필요한 기능을 불러와 사용할 수 있습니다.
-
-- `import 모듈명`: 전체 모듈을 불러옵니다.
-- `import 모듈명 as 별칭`: 모듈에 별칭을 붙여 간편하게 사용할 수 있습니다.
-- `from 모듈 import 함수`: 특정 함수나 클래스만 불러올 수 있습니다.
-
-### 🔹 기본 import 사용법
 
 ```python
 import math
 print(math.sqrt(16))  # 4.0
-```
 
----
-
-### 🔹 alias 사용
-
-```python
 import numpy as np
-arr = np.array([1, 2, 3])
-print(arr)
-```
+print(np.array([1, 2, 3]))
 
----
-
-### 🔹 from-import 구문
-
-```python
 from math import pi
 print(pi)
 ```
@@ -41,14 +133,9 @@ print(pi)
 
 ## 🔢 NumPy 기본 사용법
 
-**NumPy(Numerical Python)**는 다차원 배열 객체와 벡터화 연산을 지원하는 파이썬의 핵심 패키지입니다.  
-머신러닝과 딥러닝에서 사용되는 수치 계산의 대부분은 NumPy 기반으로 구성됩니다.
-
----
+NumPy는 고성능 수치 계산 라이브러리입니다.
 
 ### 배열 생성
-
-NumPy의 `array()` 함수를 사용하여 1차원, 2차원, 다차원 배열을 생성할 수 있습니다.
 
 ```python
 a = np.array([1, 2, 3])
@@ -57,12 +144,7 @@ print(a.shape)
 print(b.shape)
 ```
 
----
-
 ### 배열 생성 함수
-
-배열을 손쉽게 초기화하는 함수들이 제공됩니다.  
-`zeros`, `ones`, `eye`, `arange`, `linspace` 등이 대표적입니다.
 
 ```python
 np.zeros((2, 3))
@@ -76,35 +158,25 @@ np.linspace(0, 1, 5)
 
 ### 브로드캐스팅
 
-크기가 다른 배열 간 연산을 자동으로 확장해서 처리하는 기능입니다.  
-딥러닝에서 편향값을 더할 때와 같이 많이 사용됩니다.
-
 ```python
 a = np.array([1, 2, 3])
-b = 5
-print(a + b)
+print(a + 5)
 ```
 
 ---
 
-### 인덱싱과 슬라이싱
-
-배열의 특정 위치에 접근하거나, 특정 범위의 값을 추출할 수 있습니다.  
-2차원 배열에서는 행과 열을 기준으로 접근합니다.
+### 인덱싱 / 슬라이싱
 
 ```python
 arr = np.array([[1, 2, 3], [4, 5, 6]])
-print(arr[0, 1])
-print(arr[:, 1])
-print(arr[arr > 3])
+print(arr[0, 1])     # 2
+print(arr[:, 1])     # 두 번째 열
+print(arr[arr > 3])  # 4, 5, 6
 ```
 
 ---
 
 ### 통계 함수
-
-`mean`, `std`, `max`, `min` 등 통계적 연산을 위한 다양한 함수들이 제공됩니다.  
-데이터 분석과 전처리 과정에서 유용하게 사용됩니다.
 
 ```python
 data = np.array([1, 2, 3, 4, 5])
@@ -117,34 +189,25 @@ print(np.max(data))
 
 ### 배열 변형
 
-`reshape`, `flatten` 등을 사용하여 배열의 형태를 자유롭게 바꿀 수 있습니다.  
-머신러닝에서는 입력 데이터를 네트워크 구조에 맞게 조정할 때 사용됩니다.
-
 ```python
 a = np.array([[1, 2, 3], [4, 5, 6]])
-a_reshaped = a.reshape(3, 2)
-a_flattened = a.flatten()
+print(a.reshape(3, 2))
+print(a.flatten())
 ```
 
 ---
 
 ### 난수 생성
 
-난수 배열은 데이터 샘플링, 초기 가중치 설정 등에 사용됩니다.  
-정규분포, 균등분포 기반 난수 생성이 가능합니다.
-
 ```python
 np.random.seed(0)
-np.random.rand(3, 3)
-np.random.randn(3, 3)
+print(np.random.rand(3, 3))
+print(np.random.randn(3, 3))
 ```
 
 ---
 
 ### 선형대수 연산
-
-`dot`, `@`, `transpose` 등을 통해 벡터와 행렬 연산을 수행할 수 있습니다.  
-신경망의 연산과 직결되는 매우 중요한 기능입니다.
 
 ```python
 a = np.array([[1, 2], [3, 4]])
@@ -160,9 +223,6 @@ print(a.T)
 
 ### 과제 1️⃣: 통계 계산
 
-사용자로부터 여러 숫자를 입력받아 배열로 변환한 후,  
-최댓값, 최솟값, 평균, 표준편차를 계산해 출력합니다.
-
 ```python
 data = input("숫자 여러 개 입력 (예: 1 2 3): ")
 nums = np.array([int(i) for i in data.split()])
@@ -175,9 +235,6 @@ print("표준편차:", np.std(nums))
 ---
 
 ### 과제 2️⃣: 각 요소에 5 더하기
-
-입력받은 숫자 배열의 각 요소에 5를 더한 새 배열을 출력합니다.  
-브로드캐스팅을 활용한 연산 예시입니다.
 
 ```python
 plus5 = nums + 5
