@@ -1,20 +1,47 @@
-
-# 📘 Week2‑1 – pandas, 파일 시스템, 데이터셋
+# 📘 Week2-1 – pandas, 파일 시스템, 데이터셋 
 
 ---
 
-pip, conda 설명 추가
+## 패키지 관리 도구: pip & conda
 
+### ✩ pip
+`pip` 은 Python 가각에 기본적으로 포함되는 패키지 관리 도구입니다. PyPI(Python Package Index)에서 다양한 가장 포함적인 라이브러드를 설치할 수 있게 되는 것이 특징입니다.
 
-## 📂 파일 시스템 이해
+- 설치: `pip install pandas`
+- 업그레이드: `pip install --upgrade pandas`
+- 패키지 목록: `pip list`
 
-### 🔹 디렉토리와 경로
-| 구분 | 설명 | 예시 |
+> Google Colab 같은 홈페이지 건은 `pip`만 사용가능🌎
+
+### ✩ conda
+`conda`는 Anaconda 패키지 통합 관리 도구입니다. 자체가 가장한 Python 가각과 같이 가장가 간단하고 연관리 관리를 통해 두개 이상의 가장가들 복잡성 없이 만들어 줍니다.
+
+- 가장가 생성: `conda create -n myenv python=3.10`
+- 가장가 사용: `conda activate myenv`
+- 패키지 설치: `conda install pandas`
+
+---
+
+## 파일 시스템 이해
+
+파일은 파이썬이 자동으로 파일 공간을 이용해 저장해보고, 거의 모든 OS는 개발자가 자동화가 가능한 공간을 허용합니다.
+
+### ✩ 기본 경로 정의
+| 구별 | 설명 | 예시 |
 |------|------|------|
-| **상대경로** | 현재 작업 디렉토리를 기준으로 한 경로 | `../data/sample.csv` |
-| **절대경로** | 루트(`/`)부터 시작하는 전체 경로 | `/home/user/project/data/sample.csv` |
+| **절대경로** | 루트(`/`)로부터 시작하는 전체 경로 | `/home/user/data/file.csv` |
+| **상대경로** | 현재 작업 경로를 기준 | `../data/file.csv` |
+
+가장 많이 사용되는 `os` 모듈 예시:
+
+```python
+import os
+print(os.getcwd())            # 현재 위치
+print(os.path.exists("data.csv"))  # 파일 존재 확인
+```
 
 ---
+
 
 ## 🐼 pandas 기초
 
