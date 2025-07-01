@@ -4,21 +4,84 @@
 
 ## 패키지 관리 도구: pip & conda
 
-### ✩ pip
-`pip` 은 Python 가각에 기본적으로 포함되는 패키지 관리 도구입니다. PyPI(Python Package Index)에서 다양한 가장 포함적인 라이브러드를 설치할 수 있게 되는 것이 특징입니다.
+# 📦 pip vs conda 정리
 
-- 설치: `pip install pandas`
-- 업그레이드: `pip install --upgrade pandas`
-- 패키지 목록: `pip list`
+Python 개발 환경에서 패키지를 설치하고 관리하기 위한 대표적인 도구는 `pip`과 `conda`입니다. 각각의 특징과 사용법을 아래와 같이 정리합니다.
 
-> Google Colab 같은 홈페이지 건은 `pip`만 사용가능🌎
 
-### ✩ conda
-`conda`는 Anaconda 패키지 통합 관리 도구입니다. 자체가 가장한 Python 가각과 같이 가장가 간단하고 연관리 관리를 통해 두개 이상의 가장가들 복잡성 없이 만들어 줍니다.
+## 🐍 pip (Python Package Installer)
 
-- 가장가 생성: `conda create -n myenv python=3.10`
-- 가장가 사용: `conda activate myenv`
-- 패키지 설치: `conda install pandas`
+### ✅ 개요
+- Python 표준 패키지 관리자
+- `PyPI`(Python Package Index)에 등록된 수많은 패키지 설치 가능
+- 가볍고 범용적인 설치 도구
+
+### ✅ 주요 명령어
+
+| 명령어 | 설명 |
+|--------|------|
+| `pip install 패키지명` | 패키지 설치 |
+| `pip install --upgrade 패키지명` | 패키지 업그레이드 |
+| `pip uninstall 패키지명` | 패키지 제거 |
+| `pip list` | 설치된 패키지 목록 확인 |
+| `pip show 패키지명` | 특정 패키지 정보 확인 |
+
+### ✅ 장점
+- 설치 속도가 빠르고 가볍다
+- PyPI의 다양한 패키지에 접근 가능
+- Colab, Jupyter 등 대부분의 환경에서 기본 제공
+
+### ⚠️ 단점
+- 패키지 간 의존성 충돌 가능성이 있음
+- 가상환경을 별도로 구성해 사용하는 것이 안전
+
+---
+
+## 🐾 conda (Anaconda Package Manager)
+
+### ✅ 개요
+- Anaconda 배포판에서 사용하는 패키지 & 환경 관리 도구
+- 패키지 설치뿐 아니라 **Python 버전 및 가상환경 전체를 통합 관리** 가능
+
+### ✅ 주요 명령어
+
+| 명령어 | 설명 |
+|--------|------|
+| `conda create -n 환경명 python=버전` | 새로운 가상환경 생성 |
+| `conda activate 환경명` | 환경 활성화 |
+| `conda deactivate` | 환경 비활성화 |
+| `conda install 패키지명` | 패키지 설치 |
+| `conda list` | 설치된 패키지 목록 확인 |
+
+### ✅ 장점
+- Python 버전까지 통합 관리 가능
+- 과학·수치계산 라이브러리 설치 시 안정적
+- 의존성 자동 해결 기능이 탁월
+
+### ⚠️ 단점
+- 초기 설치 용량이 크고 무겁다
+- 실행 속도가 pip보다 다소 느림
+
+---
+
+## 📊 비교 요약
+
+| 항목 | pip | conda |
+|------|-----|--------|
+| 사용 환경 | Python 기본 | Anaconda 전용 |
+| 패키지 소스 | PyPI | Anaconda Repository, conda-forge |
+| 가상환경 지원 | 별도 도구 필요 (venv) | 기본 내장 |
+| 의존성 해결 | 낮음 | 높음 |
+| 설치 속도 | 빠름 | 다소 느림 |
+| 과학 계산 패키지 | 제한적 | 강력 (numpy, scipy 등 포함) |
+
+---
+
+## ✅ 정리
+- **간단하고 빠른 설치**가 필요하면 `pip` 사용
+- **환경 전체를 안정적으로 구성**하려면 `conda` 사용
+
+> 실무에서는 둘을 **혼용**하기도 하며, `conda` 환경에서 `pip` 명령도 사용할 수 있습니다.
 
 ---
 
