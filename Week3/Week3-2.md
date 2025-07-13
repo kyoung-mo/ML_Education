@@ -664,6 +664,30 @@ print("가중치 변화량 dW1:", dW1)
 print("바이어스 변화량 db1:", db1)
 ```
 
+역전파를 진행하여 파라미터를 업데이트 한 이후, 다시 순전파를 진행시켜보고 결과를 비교하라
+
+```python
+# === 파라미터 업데이트 (경사 하강법 적용) ===
+lr = 0.1  # 학습률
+
+W2_new = W2 - lr * dW2
+b2_new = b2 - lr * db2
+
+W1_new = W1 - lr * dW1
+b1_new = b1 - lr * db1
+
+# === 업데이트된 파라미터로 순전파 다시 수행 ===
+z1_new = np.dot(W1_new, x) + b1_new
+a1_new = sigmoid(z1_new)
+
+z2_new = np.dot(W2_new, a1_new) + b2_new
+a2_new = sigmoid(z2_new)
+
+print("\n[업데이트 후 순전파 결과]")
+print("최종 출력값 (a2):", a2_new)
+```
+
+
 ## 순전파 및 역전파 결과 정리
 
 ### 1. 순전파 결과
